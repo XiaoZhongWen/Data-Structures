@@ -48,43 +48,37 @@ void InitSLList::addToTail(int el) {
 }
 
 int InitSLList::deleteFromHead() {
-    if (this->isEmpty()) {
-        return 0;
+    assert(!isEmpty());
+    int el = this->header->info;
+    InitSLLNode *tmp = this->header;
+    if (this->header == this->tail) {
+        this->header = this->tail = 0;
     } else {
-        int el = this->header->info;
-        InitSLLNode *tmp = this->header;
-        if (this->header == this->tail) {
-            this->header = this->tail = 0;
-        } else {
-            this->header = this->header->next;
-        }
-        delete tmp;
-        tmp = 0;
-        return el;
+        this->header = this->header->next;
     }
+    delete tmp;
+    tmp = 0;
+    return el;
 }
 
 int InitSLList::deleteFromTail() {
-    if (this->isEmpty()) {
-        return 0;
+    assert(!isEmpty());
+    int el = this->tail->info;
+    if (this->header == this->tail) {
+        InitSLLNode *tmp = this->header;
+        this->header = this->tail = 0;
+        delete tmp;
+        tmp = 0;
     } else {
-        int el = this->tail->info;
-        if (this->header == this->tail) {
-            InitSLLNode *tmp = this->header;
-            this->header = this->tail = 0;
-            delete tmp;
-            tmp = 0;
-        } else {
-            InitSLLNode *tmp = this->header;
-            while (tmp->next != this->tail) {
-                tmp = tmp->next;
-            }
-            tmp->next = 0;
-            delete this->tail;
-            this->tail = tmp;
+        InitSLLNode *tmp = this->header;
+        while (tmp->next != this->tail) {
+            tmp = tmp->next;
         }
-        return el;
+        tmp->next = 0;
+        delete this->tail;
+        this->tail = tmp;
     }
+    return el;
 }
 
 void InitSLList::deleteNode(int el) {
