@@ -10,15 +10,18 @@
 #define DoublyLinkedList_hpp
 
 #include <stdio.h>
-#include "DLLNode.hpp"
+#include "DLLNode.cpp"
 
 template <typename T>
 class DoublyLinkedList {
 public:
     DoublyLinkedList();
+    ~DoublyLinkedList();
     
     void addToDLLTail(const T& t);
     T deleteToDLLTail();
+    
+    void traverse();
     
 protected:
     DLLNode<T> *head;

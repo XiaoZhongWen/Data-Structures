@@ -7,6 +7,8 @@
 //
 
 #include "DLLNode.hpp"
+#include <iostream>
+using namespace std;
 
 template <typename T>
 DLLNode<T>::DLLNode() {
@@ -18,4 +20,9 @@ DLLNode<T>::DLLNode(const T &el, DLLNode<T> *p, DLLNode<T> *n) {
     this->info = el;
     this->prev = p;
     this->next = n;
+}
+
+template <typename T>
+DLLNode<T>::~DLLNode<T>() {
+    cout << "dealloc DLLNode " << this << endl;
 }

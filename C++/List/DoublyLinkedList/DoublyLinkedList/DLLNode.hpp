@@ -16,7 +16,8 @@ class DLLNode {
 public:
     DLLNode();
     DLLNode(const T &el, DLLNode *p = 0, DLLNode *n = 0);
-
+    ~DLLNode();
+    
     T info;
     DLLNode *prev;
     DLLNode *next;
