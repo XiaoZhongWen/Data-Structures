@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F6BA05D21155C4000C34064 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F6BA05C21155C4000C34064 /* main.cpp */; };
+		1F6BA065211560D900C34064 /* InitSLLNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F6BA063211560D900C34064 /* InitSLLNode.cpp */; };
+		1F6BA0682115626300C34064 /* InitSLList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F6BA0662115626300C34064 /* InitSLList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		1F6BA05921155C4000C34064 /* SingleLinkList */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SingleLinkList; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6BA05C21155C4000C34064 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1F6BA063211560D900C34064 /* InitSLLNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InitSLLNode.cpp; sourceTree = "<group>"; };
+		1F6BA064211560D900C34064 /* InitSLLNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InitSLLNode.hpp; sourceTree = "<group>"; };
+		1F6BA0662115626300C34064 /* InitSLList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InitSLList.cpp; sourceTree = "<group>"; };
+		1F6BA0672115626300C34064 /* InitSLList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InitSLList.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				1F6BA05C21155C4000C34064 /* main.cpp */,
+				1F6BA064211560D900C34064 /* InitSLLNode.hpp */,
+				1F6BA063211560D900C34064 /* InitSLLNode.cpp */,
+				1F6BA0672115626300C34064 /* InitSLList.hpp */,
+				1F6BA0662115626300C34064 /* InitSLList.cpp */,
 			);
 			path = SingleLinkList;
 			sourceTree = "<group>";
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F6BA0682115626300C34064 /* InitSLList.cpp in Sources */,
 				1F6BA05D21155C4000C34064 /* main.cpp in Sources */,
+				1F6BA065211560D900C34064 /* InitSLLNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
