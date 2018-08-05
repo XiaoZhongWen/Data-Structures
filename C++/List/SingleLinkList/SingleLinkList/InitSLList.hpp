@@ -18,13 +18,17 @@ public:
     ~InitSLList();
     
     bool isEmpty();
+    int count();
     void addToHead(int el);
     void addToTail(int el);
     int deleteFromHead();
     int deleteFromTail();
+    int deleteNodeAt(int index);
     void deleteNode(int el);
     bool isInList(int el) const;
+    bool isEqual(InitSLList *list);
     void traverse() const;
+    void reverse();
     
 private:
     InitSLLNode *header;

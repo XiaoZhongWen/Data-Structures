@@ -20,9 +20,6 @@ int main(int argc, const char * argv[]) {
     list->addToTail(5);
     list->addToTail(6);
     
-    cout << list->isInList(5) << endl;
-    cout << list->isInList(7) << endl;
-    
     list->deleteFromHead();
     list->deleteFromTail();
     
@@ -33,12 +30,10 @@ int main(int argc, const char * argv[]) {
     list->deleteNode(1);
     list->deleteNode(6);
     
-    list->deleteFromHead();
-    list->deleteFromTail();
+//    list->deleteFromHead();
+//    list->deleteFromTail();
     
-    list->deleteNode(3);
-    cout << list->isEmpty() << endl;
-    
+    list->reverse();
     list->traverse();
     
     delete list;
