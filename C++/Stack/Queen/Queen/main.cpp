@@ -11,7 +11,7 @@
 
 int main(int argc, const char * argv[]) {
     
-    ChessBoard *chessBoard = new ChessBoard();
+    ChessBoard *chessBoard = new ChessBoard(12);
     chessBoard->findSolutions();
     chessBoard->printAllSolutions();
     
