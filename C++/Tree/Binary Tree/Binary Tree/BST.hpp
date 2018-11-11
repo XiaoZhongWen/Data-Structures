@@ -74,6 +74,12 @@ public:
     // 删除二叉树所有节点
     void deleteAllNode();
     
+    // 判断二叉树是否是二叉查找树
+    bool isBinarySearchTree();
+    
+    // 创建二叉树的镜像
+    void createBinaryTreeMirror();
+    
 protected:
     /**
      *  树的遍历
@@ -91,6 +97,9 @@ protected:
     // 删除元素
     void deleteByMerging(BSTNode<T>*&);
     void deleteByCoping(BSTNode<T>*&);
+    
+    // 判断二叉树是否是二叉查找树
+    bool isBinarySearchTree(BSTNode<T> *node);
     
 private:
     BSTNode<T> *root;
@@ -312,6 +321,77 @@ int BST<T>::treeNodeCountWithNodeType(BinaryTreeNodeType nodeType) {
                 break;
         }
         return count;
+    }
+}
+
+template <class T>
+bool BST<T>::isBinarySearchTree() {
+    return isBinarySearchTree(this->root);
+}
+
+template <class T>
+bool BST<T>::isBinarySearchTree(BSTNode<T> *node) {
+    if (node != NULL) {
+        // 1. 该节点为叶子节点
+        if (node->left == NULL && node->right == NULL) {
+            return true;
+        }
+        // 2. 该节点有左子树, 没有右子树
+        if (node->left != NULL && node->right == NULL) {
+            return
+            node->el > node->left->el
+            && isBinarySearchTree(node->left);
+        }
+        // 3. 该节点有右子树, 没有左子树
+        if (node->right != NULL && node->left == NULL) {
+            return
+            node->el < node->right->el
+            && isBinarySearchTree(node->right);
+        }
+        // 4. 该节点既有左子树也有右子树
+        if (node->left != NULL && node->right != NULL) {
+            return
+            node->el > node->left->el
+            && node->el < node->right->el
+            && isBinarySearchTree(node->left)
+            && isBinarySearchTree(node->right);
+        }
+        return false;
+    } else {
+        return false;
+    }
+}
+
+template <class T>
+void BST<T>::createBinaryTreeMirror() {
+    if (root == NULL) {
+        return;
+    } else {
+        BSTNode<T> *p = root;
+        queue<BSTNode<T> *> travQuene;
+        travQuene.push(p);
+        while (p != NULL && (p->left != NULL || p->right != NULL)) {
+            travQuene.pop();
+            if (p->left != NULL && p->right == NULL) {
+                // 1. p只有左子树
+                travQuene.push(p->left);
+                p->right = p->left;
+                p->left = NULL;
+            } else if (p->right != NULL && p->left == NULL) {
+                // 2. p只有右子树
+                travQuene.push(p->right);
+                p->left = p->right;
+                p->right = NULL;
+            } else if (p->left != NULL && p->right != NULL) {
+                // 3. p既有左子树又有右子树
+                travQuene.push(p->left);
+                travQuene.push(p->right);
+                BSTNode<T> *node = p->left;
+                p->left = p->right;
+                p->right = node;
+            }
+            p = travQuene.front();
+        }
     }
 }
 

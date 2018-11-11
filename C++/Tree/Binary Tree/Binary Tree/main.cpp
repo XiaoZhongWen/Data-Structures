@@ -41,5 +41,20 @@ int main(int argc, const char * argv[]) {
     cout << "count of lead node is : " << leafNodeCount << endl;
     cout << "height of the binary tree is : " << height << endl;
     
+    if (binaryTree->isBinarySearchTree()) {
+        cout << "this is a binary search tree" << endl;
+    } else {
+        cout << "this is not a binary search tree" << endl;
+    }
+    
+    binaryTree->createBinaryTreeMirror();
+    binaryTree->preorder();
+    
+    if (binaryTree->isBinarySearchTree()) {
+        cout << "this is a binary search tree" << endl;
+    } else {
+        cout << "this is not a binary search tree" << endl;
+    }
+    
     return 0;
 }
