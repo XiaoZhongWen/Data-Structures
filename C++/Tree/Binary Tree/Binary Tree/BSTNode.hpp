@@ -18,7 +18,7 @@ class BSTNode {
 public:
     BSTNode();
     BSTNode(const T &el);
-
+    
     BSTNode<T> *left;
     BSTNode<T> *right;
     T el;

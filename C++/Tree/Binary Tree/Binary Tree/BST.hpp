@@ -69,7 +69,9 @@ public:
     int treeNodeCountWithNodeType(BinaryTreeNodeType nodeType);
     
     // 计算树的高度
-    int heightOfBinaryTree();
+    int heightOfBinaryTree_iterativePostorder(); // 后序遍历过程中, 最大栈长即为树高
+    int heightOfBinaryTree_iterativeBreadth();   // 层序遍历, 最大层次即为树高
+    int heightOfBinaryTree_recursion();          // 通过递归的方式求树高
     
     // 删除二叉树所有节点
     void deleteAllNode();
@@ -136,6 +138,24 @@ void BST<T>::iterativePreorder() {
             if (p->left) {
                 travStack.push(p->left);
             }
+        }
+    }
+}
+
+template <class T>
+void BST<T>::iterativeInorder() {
+    stack<BSTNode<T> *> travStack;
+    BSTNode<T> *p = this->root;
+    while (p != NULL || !travStack.empty()) {
+        while (p != NULL) {
+            travStack.push(p);
+            p = p->left;
+        }
+        if (!travStack.empty()) {
+            p = travStack.top();
+            travStack.pop();
+            visit(p);
+            p = p->right;
         }
     }
 }
@@ -395,29 +415,23 @@ void BST<T>::createBinaryTreeMirror() {
     }
 }
 
-#warning logic error
 // 计算树的高度
+// 1. 后序遍历, 记录最大栈长
 template <class T>
-int BST<T>::heightOfBinaryTree() {
-    if (!this->root) {
-        return 0;
-    } else {
-        int height = 0;
-        stack<BSTNode<T> *> binaryStack;
-        BSTNode<T> *p = this->root;
-        binaryStack.push(p);
-        while (!binaryStack.empty()) {
-            p = binaryStack.top();
-            binaryStack.pop();
-            if (p->right) {
-                binaryStack.push(p->right);
-            }
-            if (p->left) {
-                binaryStack.push(p->left);
-            }
-        }
-        return height;
-    }
+int BST<T>::heightOfBinaryTree_iterativePostorder() {
+    return 0;
+}
+
+// 2. 层序遍历, 记录层数
+template <class T>
+int BST<T>::heightOfBinaryTree_iterativeBreadth() {
+    return 0;
+}
+
+// 3. 递归方式
+template <class T>
+int BST<T>::heightOfBinaryTree_recursion() {
+    return 0;
 }
 
 // 删除二叉树所有节点

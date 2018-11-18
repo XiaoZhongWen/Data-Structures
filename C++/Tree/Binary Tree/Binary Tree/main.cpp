@@ -34,12 +34,10 @@ int main(int argc, const char * argv[]) {
     int leftNodeCount = binaryTree->treeNodeCountWithNodeType(BinaryTreeRightNode);
     int leafNodeCount = binaryTree->treeNodeCountWithNodeType(BinaryTreeLeafNode);
     
-    int height = binaryTree->heightOfBinaryTree();
     
     cout << "count of normal node is : " << normalNodeCount << endl;
     cout << "count of right node is : " << leftNodeCount << endl;
     cout << "count of lead node is : " << leafNodeCount << endl;
-    cout << "height of the binary tree is : " << height << endl;
     
     if (binaryTree->isBinarySearchTree()) {
         cout << "this is a binary search tree" << endl;
