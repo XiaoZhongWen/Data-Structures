@@ -71,7 +71,11 @@ public:
     // 计算树的高度
     int heightOfBinaryTree_iterativePostorder(); // 后序遍历过程中, 最大栈长即为树高
     int heightOfBinaryTree_iterativeBreadth();   // 层序遍历, 最大层次即为树高
-    int heightOfBinaryTree_recursion();          // 通过递归的方式求树高
+    
+    // 通过递归的方式求树高
+    int heightOfBinaryTree_recursion() {
+        return this->heightOfBinaryTree_recursion(this->root);
+    }
     
     // 删除二叉树所有节点
     void deleteAllNode();
@@ -102,6 +106,8 @@ protected:
     
     // 判断二叉树是否是二叉查找树
     bool isBinarySearchTree(BSTNode<T> *node);
+    
+    int heightOfBinaryTree_recursion(BSTNode<T> *node);
     
 private:
     BSTNode<T> *root;
@@ -142,6 +148,7 @@ void BST<T>::iterativePreorder() {
     }
 }
 
+// 中序遍历 - 非递归方式
 template <class T>
 void BST<T>::iterativeInorder() {
     stack<BSTNode<T> *> travStack;
@@ -157,6 +164,31 @@ void BST<T>::iterativeInorder() {
             visit(p);
             p = p->right;
         }
+    }
+}
+
+// 后序遍历 - 非递归方式
+template <class T>
+void BST<T>::iterativePostorder() {
+    stack<BSTNode<T> *> travStack;
+    BSTNode<T> *p = this->root;
+    BSTNode<T> *q = this->root;
+    while (p) {
+        while (p->left) {
+            travStack.push(p);
+            p = p->left;
+        }
+        while (p->right == 0 || p->right == q) {
+            visit(p);
+            q = p;
+            if (travStack.empty()) {
+                return;
+            }
+            p = travStack.top();
+            travStack.pop();
+        }
+        travStack.push(p);
+        p = p->right;
     }
 }
 
@@ -419,19 +451,83 @@ void BST<T>::createBinaryTreeMirror() {
 // 1. 后序遍历, 记录最大栈长
 template <class T>
 int BST<T>::heightOfBinaryTree_iterativePostorder() {
-    return 0;
+    stack<BSTNode<T> *> travStack;
+    BSTNode<T> *p = this->root;
+    BSTNode<T> *q = this->root;
+    size_t maxStackSize = 0;
+    while (p) {
+        while (p->left) {
+            travStack.push(p);
+            p = p->left;
+        }
+        while (p->right == NULL || p->right == q) {
+            q = p;
+            if (travStack.empty()) {
+                return (int)maxStackSize;
+            }
+            if (maxStackSize < travStack.size()) {
+                maxStackSize = travStack.size();
+            }
+            p = travStack.top();
+            travStack.pop();
+        }
+        travStack.push(p);
+        p = p->right;
+    }
+    return (int)maxStackSize;
 }
 
 // 2. 层序遍历, 记录层数
 template <class T>
 int BST<T>::heightOfBinaryTree_iterativeBreadth() {
-    return 0;
+    // 记录树的高度
+    int height = 0;
+    if (this->root->left == NULL && this->root->right == NULL) {
+        return height;
+    }
+    // 用于遍历二叉树的复制队列
+    queue<BSTNode<T> *> binaryQueue;
+    // 开始时,将根节点入队
+    binaryQueue.push(this->root);
+    // 记录队列中最后一个树节点, 初始时为树的根节点
+    BSTNode<T> *tailNode = this->root;
+    // 层序遍历二叉树
+    while (!binaryQueue.empty()) {
+        // 取队头元素, 出队
+        BSTNode<T> *curNode = binaryQueue.front();
+        binaryQueue.pop();
+        // 将当前出队的元素的子树节点入队
+        if (curNode->left != NULL) {
+            binaryQueue.push(curNode->left);
+        }
+        if (curNode->right != NULL) {
+            binaryQueue.push(curNode->right);
+        }
+        // 当队头元素为之前记录的队尾元素时, 表明已经完成了一层的遍历, 高度加1并更新tailNode
+        if (curNode == tailNode) {
+            height++;
+            tailNode = binaryQueue.back();
+        }
+    }
+    height--;
+    return height;
 }
 
 // 3. 递归方式
 template <class T>
-int BST<T>::heightOfBinaryTree_recursion() {
-    return 0;
+int BST<T>::heightOfBinaryTree_recursion(BSTNode<T> *node) {
+    if (node->left == NULL && node->right == NULL) {
+        return 0;
+    } else if (node->left != NULL && node->right == NULL) {
+        return this->heightOfBinaryTree_recursion(node->left) + 1;
+    } else if (node->left == NULL && node->right != NULL) {
+        return this->heightOfBinaryTree_recursion(node->right) + 1;
+    } else {
+        int heightForLeftChildTree = this->heightOfBinaryTree_recursion(node->left);
+        int heightForRightChildTree = this->heightOfBinaryTree_recursion(node->right);
+        int heightForChildTree = heightForLeftChildTree > heightForRightChildTree ? heightForLeftChildTree : heightForRightChildTree;
+        return heightForChildTree + 1;
+    }
 }
 
 // 删除二叉树所有节点

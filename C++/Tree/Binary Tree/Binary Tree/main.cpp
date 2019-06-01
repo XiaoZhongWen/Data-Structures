@@ -17,19 +17,29 @@ void testTemplate(const T &t) {
 int main(int argc, const char * argv[]) {
     
     BST<int> *binaryTree = new BST<int>();
+    binaryTree->insert(25);
     binaryTree->insert(15);
-    binaryTree->insert(10);
-    binaryTree->insert(30);
-    binaryTree->insert(5);
-    binaryTree->insert(4);
-    binaryTree->insert(7);
-    binaryTree->insert(20);
     binaryTree->insert(40);
+    binaryTree->insert(12);
+    binaryTree->insert(20);
+    binaryTree->insert(30);
+    binaryTree->insert(45);
+    binaryTree->insert(8);
+    binaryTree->insert(16);
+    binaryTree->insert(23);
+    binaryTree->insert(35);
+    binaryTree->insert(10);
+    binaryTree->insert(22);
+    binaryTree->insert(24);
+    binaryTree->insert(9);
     
-    binaryTree->insert(3);
-//    binaryTree->insert(6);
+//    binaryTree->insert(50);
+//    binaryTree->insert(55);
+//    binaryTree->insert(60);
+//    binaryTree->insert(65);
     
-    binaryTree->preorder();
+//    binaryTree->preorder();
+    binaryTree->iterativePostorder();
     int normalNodeCount = binaryTree->treeNodeCountWithNodeType(BinaryTreeNormalNode);
     int leftNodeCount = binaryTree->treeNodeCountWithNodeType(BinaryTreeRightNode);
     int leafNodeCount = binaryTree->treeNodeCountWithNodeType(BinaryTreeLeafNode);
@@ -45,14 +55,23 @@ int main(int argc, const char * argv[]) {
         cout << "this is not a binary search tree" << endl;
     }
     
-    binaryTree->createBinaryTreeMirror();
-    binaryTree->preorder();
+    int height = binaryTree->heightOfBinaryTree_iterativeBreadth();
+    cout << "<iterativeBreadth> the height of tree is " << height << endl;
     
-    if (binaryTree->isBinarySearchTree()) {
-        cout << "this is a binary search tree" << endl;
-    } else {
-        cout << "this is not a binary search tree" << endl;
-    }
+    height = binaryTree->heightOfBinaryTree_iterativePostorder();
+    cout << "<iterativePostorder> the height of tree is " << height << endl;
+    
+    height = binaryTree->heightOfBinaryTree_recursion();
+    cout << "<recursion> the height of tree is " << height << endl;
+    
+//    binaryTree->createBinaryTreeMirror();
+//    binaryTree->preorder();
+//    
+//    if (binaryTree->isBinarySearchTree()) {
+//        cout << "this is a binary search tree" << endl;
+//    } else {
+//        cout << "this is not a binary search tree" << endl;
+//    }
     
     return 0;
 }
